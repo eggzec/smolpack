@@ -1,0 +1,7 @@
+[project]
+name = "smolpack"
+version = "0.1.0"
+description = "Multidimensional Quadrature Using Sparse Grids"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
