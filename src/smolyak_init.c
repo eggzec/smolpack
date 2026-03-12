@@ -44,6 +44,7 @@ double (*sm_f)(int, double x[]);
 
 /**
  * @brief Initialise the Smolyak quadrature engine.
+ * @date  28 April 2007
  *
  * Builds index mappings, look-up tables and loads the one-dimensional
  * Clenshaw-Curtis quadrature nodes and weights (delta form) for all

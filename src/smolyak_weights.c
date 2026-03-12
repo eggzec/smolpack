@@ -10,6 +10,7 @@
 
 /**
  * @brief Allocate a single sm_node.
+ * @date  25 April 2007
  *
  * @return Pointer to the newly allocated sm_node.
  */
@@ -19,6 +20,7 @@ struct sm_node *sm_talloc(void) {
 
 /**
  * @brief Recursively free a tree of sm_node structures.
+ * @date  25 April 2007
  *
  * @param p Pointer to the root sm_node of the subtree to free.
  */
@@ -30,9 +32,7 @@ void sm_frei(struct sm_node *p) {
     }
     if (!(p->left == NULL)) {
         for (i = 0; i < sm_maxind; i++) {
-            if (!(p->left + i == NULL)) {
-                sm_frei(p->left + i);
-            }
+            sm_frei(p->left + i);
         }
         free(p->left);
     }
@@ -44,16 +44,15 @@ void sm_frei(struct sm_node *p) {
 
 /**
  * @brief Return the Smolyak coefficient, caching results in a tree.
+ * @date  25 April 2007
  *
  * @return The computed coefficient value.
  */
 double sm_coeff(void) {
     int i;
     int j;
-    int l;
     struct sm_node *p;
     struct sm_node *pt;
-    int r;
 
     p = sm_root;
 
@@ -102,6 +101,7 @@ double sm_coeff(void) {
 
 /**
  * @brief Divide-and-conquer computation of index sums.
+ * @date  25 April 2007
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -120,6 +120,7 @@ void sm_sumind(int r, int s) {
 
 /**
  * @brief Calculate the Smolyak coefficient via divide-and-conquer.
+ * @date  25 April 2007
  *
  * @param l Level parameter.
  * @return The computed coefficient value.
@@ -133,6 +134,7 @@ double sm_calccoeff(int l) {
 
 /**
  * @brief Divide-and-conquer weight computation ("left" branch).
+ * @date  25 April 2007
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -173,6 +175,7 @@ double sm_wl(int r, int s, int l) {
 
 /**
  * @brief Divide-and-conquer weight computation ("exact" branch).
+ * @date  25 April 2007
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -209,20 +212,20 @@ double sm_we(int r, int s, int l) {
 
 /**
  * @brief Brute-force coefficient computation.
+ * @date  25 April 2007
  *
  * @param k Current dimension index (0 to start, sm_d+1 to accumulate).
  * @param l Remaining level budget.
  * @return The accumulated weighted sum.
  */
 double sm_calccoeff2(int k, int l) {
-    double dummy;
     int i;
     double wprod;
 
     if (k == 0) {
         sm_wcount++;
         sm_wsum = 0.0;
-        dummy = sm_calccoeff2(1, l);
+        sm_calccoeff2(1, l);
     } else if (k == sm_d + 1) {
         wprod = 1.0;
         for (i = 1; i <= sm_d; i++) {
@@ -238,7 +241,7 @@ double sm_calccoeff2(int k, int l) {
         i = sm_indices[k];
         while (sm_ninv[i] <= l) {
             sm_wind[k] = i;
-            dummy = sm_calccoeff2(k + 1, l - sm_ninv[i]);
+            sm_calccoeff2(k + 1, l - sm_ninv[i]);
             i++;
         }
     }

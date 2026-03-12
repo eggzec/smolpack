@@ -48,6 +48,7 @@ double (*cc_f)(int, double x[]);
 
 /**
  * @brief Initialise one-dimensional CC formulae and coefficient tree.
+ * @date  25 April 2007
  *
  * @param dim  Spatial dimension.
  */
