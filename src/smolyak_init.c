@@ -44,7 +44,10 @@ double (*sm_f)(int, double x[]);
 
 /**
  * @brief Initialise the Smolyak quadrature engine.
+<<<<<<< HEAD
  * @date  28 April 2007
+=======
+>>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
  *
  * Builds index mappings, look-up tables and loads the one-dimensional
  * Clenshaw-Curtis quadrature nodes and weights (delta form) for all
