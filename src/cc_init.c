@@ -49,9 +49,13 @@ double (*cc_f)(int, double x[]);
 /**
  * @brief Initialise one-dimensional CC formulae and coefficient tree.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param dim  Spatial dimension.
  */

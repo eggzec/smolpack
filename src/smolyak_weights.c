@@ -11,9 +11,13 @@
 /**
  * @brief Allocate a single sm_node.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @return Pointer to the newly allocated sm_node.
  */
@@ -24,9 +28,13 @@ struct sm_node *sm_talloc(void) {
 /**
  * @brief Recursively free a tree of sm_node structures.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param p Pointer to the root sm_node of the subtree to free.
  */
@@ -39,12 +47,16 @@ void sm_frei(struct sm_node *p) {
     if (!(p->left == NULL)) {
         for (i = 0; i < sm_maxind; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             sm_frei(p->left + i);
 =======
             if (!(p->left + i == NULL)) {
                 sm_frei(p->left + i);
             }
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+            sm_frei(p->left + i);
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
         }
         free(p->left);
     }
@@ -57,15 +69,20 @@ void sm_frei(struct sm_node *p) {
 /**
  * @brief Return the Smolyak coefficient, caching results in a tree.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @return The computed coefficient value.
  */
 double sm_coeff(void) {
     int i;
     int j;
+<<<<<<< HEAD
 <<<<<<< HEAD
     struct sm_node *p;
     struct sm_node *pt;
@@ -75,6 +92,10 @@ double sm_coeff(void) {
     struct sm_node *pt;
     int r;
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+    struct sm_node *p;
+    struct sm_node *pt;
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
 
     p = sm_root;
 
@@ -124,9 +145,13 @@ double sm_coeff(void) {
 /**
  * @brief Divide-and-conquer computation of index sums.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -146,9 +171,13 @@ void sm_sumind(int r, int s) {
 /**
  * @brief Calculate the Smolyak coefficient via divide-and-conquer.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param l Level parameter.
  * @return The computed coefficient value.
@@ -163,9 +192,13 @@ double sm_calccoeff(int l) {
 /**
  * @brief Divide-and-conquer weight computation ("left" branch).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -207,9 +240,13 @@ double sm_wl(int r, int s, int l) {
 /**
  * @brief Divide-and-conquer weight computation ("exact" branch).
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param r Left index of the range.
  * @param s Right index of the range.
@@ -247,9 +284,13 @@ double sm_we(int r, int s, int l) {
 /**
  * @brief Brute-force coefficient computation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @date  25 April 2007
 =======
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+ * @date  25 April 2007
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * @param k Current dimension index (0 to start, sm_d+1 to accumulate).
  * @param l Remaining level budget.
@@ -257,9 +298,12 @@ double sm_we(int r, int s, int l) {
  */
 double sm_calccoeff2(int k, int l) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     double dummy;
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
     int i;
     double wprod;
 
@@ -267,10 +311,14 @@ double sm_calccoeff2(int k, int l) {
         sm_wcount++;
         sm_wsum = 0.0;
 <<<<<<< HEAD
+<<<<<<< HEAD
         sm_calccoeff2(1, l);
 =======
         dummy = sm_calccoeff2(1, l);
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+        sm_calccoeff2(1, l);
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
     } else if (k == sm_d + 1) {
         wprod = 1.0;
         for (i = 1; i <= sm_d; i++) {
@@ -287,10 +335,14 @@ double sm_calccoeff2(int k, int l) {
         while (sm_ninv[i] <= l) {
             sm_wind[k] = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
             sm_calccoeff2(k + 1, l - sm_ninv[i]);
 =======
             dummy = sm_calccoeff2(k + 1, l - sm_ninv[i]);
 >>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
+=======
+            sm_calccoeff2(k + 1, l - sm_ninv[i]);
+>>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
             i++;
         }
     }
