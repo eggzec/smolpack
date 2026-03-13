@@ -87,7 +87,7 @@ if(SMOLPACK_BUILD_TESTS)
 
     target_link_libraries(test_smolpack
         smolpack
-        m
+        $<$<NOT:$<PLATFORM_ID:Windows>>:m>
     )
 
     add_test(
