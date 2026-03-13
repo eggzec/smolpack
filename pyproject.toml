@@ -1,7 +1,88 @@
 [project]
 name = "smolpack"
-version = "0.1.0"
-description = "Multidimensional Quadrature Using Sparse Grids"
+dynamic = ['version']
+description = "Multidimensional Quadrature Using Sparse Grids for Python"
+authors = [
+    { name = "John Burkardt", email = "jvb25@pitt.edu" },
+]
+maintainers = [
+    { name = "Saud Zahir", email = "m.saud.zahir@gmail.com" },
+    { name = "M Laraib Ali", email = "laraibg786@outlook.com" }
+]
 readme = "README.md"
+license = "LGPL-2.1"
+keywords = [
+    "sparse",
+    "grids",
+    "numerical",
+    "integration",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    'Programming Language :: C',
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX',
+    'Operating System :: Unix',
+    'Operating System :: MacOS',
+]
 requires-python = ">=3.10"
-dependencies = []
+
+dependencies = [
+    "numpy",
+]
+
+[project.urls]
+homepage = "https://eggzec.github.io/smolpack"
+documentation = "https://eggzec.github.io/smolpack/api/"
+source = "https://github.com/eggzec/smolpack"
+releasenotes = "https://github.com/eggzec/smolpack/releases/latest"
+issues = "https://github.com/eggzec/smolpack/issues"
+# TODO: provide changelog URL from docs
+
+[dependency-groups]
+dev = [
+  {include-group = "build"},
+  {include-group = "docs"},
+  {include-group = "test"}
+]
+build = [
+    "meson-python",
+    "ninja",
+    "setuptools_scm>=8",
+]
+docs = [
+    "zensical>=0.0.23"
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0",
+    "pytest-xdist>=3.6.1",
+]
+
+[build-system]
+requires = [
+    "meson-python",
+    "numpy",
+    "packaging",
+    "setuptools_scm>=8"
+]
+build-backend = "mesonpy"
+
+[tool.setuptools_scm]
+version_scheme = "release-branch-semver"
+local_scheme = "no-local-version"
+
+[tool.cibuildwheel]
+enable = ["cpython-prerelease"]

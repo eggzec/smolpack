@@ -7,7 +7,6 @@
 #   make test     — build and run tests
 #   make clean    — remove build artefacts
 #
-# Requirements: C11-capable compiler, math library (-lm)
 # ============================================================
 
 CC       = gcc

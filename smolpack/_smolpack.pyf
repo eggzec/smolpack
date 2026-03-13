@@ -1,0 +1,56 @@
+! The callstatement directive passes the f2py-generated callback bridge
+! (cb_ff_in__smolpack__user__routines) to the real C functions while
+
+! ---------- callback signature ----------------------------------------
+python module _smolpack__user__routines
+    interface _smolpack_user_interface
+        function ff(d, x) result(val)
+            integer intent(c, in) :: d
+            double precision intent(c, in), depend(d), dimension(d) :: x
+            double precision :: val
+        end function ff
+    end interface _smolpack_user_interface
+end python module _smolpack__user__routines
+
+! ---------- main module -----------------------------------------------
+python module _smolpack
+    interface
+
+        double precision function delayed_cc(dim, qq, print_stats, ff)
+            ! Delayed Clenshaw-Curtis Smolyak cubature.
+            fortranname int_smolyak
+            intent(c) delayed_cc
+            intent(c)
+            integer intent(c, in) :: dim
+            integer intent(c, in) :: qq
+            integer intent(c, in) :: print_stats
+            external ff
+            use _smolpack__user__routines, ff => ff
+            intent(c, callback) :: ff
+            callprotoargument int, int, double (*)(int, double *), int
+            callstatement delayed_cc_return_value = (*f2py_func)(dim, qq, cb_ff_in__smolpack__user__routines, print_stats);
+        end function delayed_cc
+
+        double precision function standard_cc(dim, qq, print_stats, ff)
+            ! Standard Clenshaw-Curtis Smolyak cubature.
+            fortranname cc_int_smolyak
+            intent(c) standard_cc
+            intent(c)
+            integer intent(c, in) :: dim
+            integer intent(c, in) :: qq
+            integer intent(c, in) :: print_stats
+            external ff
+            use _smolpack__user__routines, ff => ff
+            intent(c, callback) :: ff
+            callprotoargument int, int, double (*)(int, double *), int
+            callstatement standard_cc_return_value = (*f2py_func)(dim, qq, cb_ff_in__smolpack__user__routines, print_stats);
+        end function standard_cc
+
+        integer function get_count()
+            ! Return the global function-evaluation counter.
+            intent(c) get_count
+            intent(c)
+        end function get_count
+
+    end interface
+end python module _smolpack
