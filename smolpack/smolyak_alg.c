@@ -19,14 +19,7 @@
 
 /**
  * @brief Approximate a multidimensional integral (delayed Clenshaw-Curtis).
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @date  28 April 2007
-=======
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
- * @date  28 April 2007
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * Constructs a sparse grid from a "delayed" Clenshaw-Curtis basic
  * sequence and applies the Smolyak combination technique.
@@ -68,14 +61,7 @@ double int_smolyak(int dim, int qq, double (*ff)(int, double xx[]),
 
 /**
  * @brief Carry out the Smolyak combination algorithm.
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @date  25 April 2007
-=======
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
- * @date  25 April 2007
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * Recursively distributes the level-sum budget across dimensions.
  * When all dimensions have been assigned a formula index the
@@ -101,14 +87,7 @@ void sm_formula(int k, int l) {
 
 /**
  * @brief Calculate the value of a product formula.
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @date  25 April 2007
-=======
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
- * @date  25 April 2007
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * Iterates over all node combinations for the current formula
  * assignment, multiplying the weight coefficient by the symmetrised
@@ -118,40 +97,17 @@ void sm_formula(int k, int l) {
  * @return Accumulated product-formula value.
  */
 double sm_eval(int k) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    double dummy;
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
     int i;
 
     if (k == 0) {
         sm_summe = 0.0;
-<<<<<<< HEAD
-<<<<<<< HEAD
         sm_eval(1);
-=======
-        dummy = sm_eval(1);
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
-        sm_eval(1);
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
     } else if (k == sm_d + 1) {
         sm_summe = sm_summe + sm_coeff() * sm_fsum(0);
     } else {
         for (i = 0; i <= sm_n[sm_indices[k]]; i++) {
             sm_argind[k] = i;
-<<<<<<< HEAD
-<<<<<<< HEAD
             sm_eval(k + 1);
-=======
-            dummy = sm_eval(k + 1);
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
-            sm_eval(k + 1);
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
         }
     }
     return sm_summe;
@@ -159,14 +115,7 @@ double sm_eval(int k) {
 
 /**
  * @brief Compute symmetric sums of integrand values.
-<<<<<<< HEAD
-<<<<<<< HEAD
  * @date  26 April 2007
-=======
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
- * @date  26 April 2007
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
  *
  * Evaluates the integrand at nodes for which the same weight
  * applies, exploiting symmetry: f(x) and f(1-x) share a weight.
@@ -175,53 +124,21 @@ double sm_eval(int k) {
  * @return Accumulated function sum.
  */
 double sm_fsum(int k) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     if (k == 0) {
         sm_ftotal = 0.0;
         sm_fsum(1);
-=======
-    double dummy;
-
-    if (k == 0) {
-        sm_ftotal = 0.0;
-        dummy = sm_fsum(1);
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
-
-    if (k == 0) {
-        sm_ftotal = 0.0;
-        sm_fsum(1);
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
     } else if (k == sm_d + 1) {
         sm_ftotal = sm_ftotal + (*sm_f)(sm_d, sm_x);
     } else {
         if (sm_indices[k] == 0) {
             sm_x[k - 1] = 0.5;
-<<<<<<< HEAD
-<<<<<<< HEAD
             sm_fsum(k + 1);
         } else {
             sm_x[k - 1] = sm_xnu[sm_indices[k]][2 * sm_argind[k] + 1];
             sm_fsum(k + 1);
             sm_x[k - 1] = 1.0 - sm_x[k - 1];
             sm_fsum(k + 1);
-=======
-            dummy = sm_fsum(k + 1);
-=======
-            sm_fsum(k + 1);
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
-        } else {
-            sm_x[k - 1] = sm_xnu[sm_indices[k]][2 * sm_argind[k] + 1];
-            sm_fsum(k + 1);
-            sm_x[k - 1] = 1.0 - sm_x[k - 1];
-<<<<<<< HEAD
-            dummy = sm_fsum(k + 1);
->>>>>>> f26fbd8 (Implement Smolyak quadrature subsystem with Clenshaw-Curtis integration)
-=======
-            sm_fsum(k + 1);
->>>>>>> 62f2bf2 (Refactor Smolyak algorithms and add Genz test suite)
         }
     }
     return sm_ftotal;
