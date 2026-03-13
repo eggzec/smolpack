@@ -29,16 +29,5 @@ np_compile_args = ['-I' + incdir_numpy, '-I' + incdir_f2py]
 
 fortranobject_c = incdir_f2py / 'fortranobject.c'
 
-if host_machine.system() == 'windows'
-    c_link_args = [
-        '-static-libgcc',
-        '-Wl,-Bstatic',
-        '-lwinpthread',
-        '-Wl,-Bdynamic',
-    ]
-else
-    c_link_args = []
-endif
-
 subdir('src')
 subdir('smolpack')
