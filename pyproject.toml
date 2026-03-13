@@ -53,8 +53,13 @@ issues = "https://github.com/eggzec/smolpack/issues"
 
 [dependency-groups]
 dev = [
+  {include-group = "build"},
   {include-group = "docs"},
   {include-group = "test"}
+]
+build = [
+    "meson-python",
+    "ninja",
 ]
 docs = [
     "zensical>=0.0.23"

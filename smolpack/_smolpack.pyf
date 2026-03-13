@@ -1,9 +1,5 @@
-!    -*- f90 -*-
-! Signature file for SMOLPACK Python bindings (f2py + meson-python).
-!
 ! The callstatement directive passes the f2py-generated callback bridge
 ! (cb_ff_in__smolpack__user__routines) to the real C functions while
-! f2py manages the Python-to-C callback glue internally.
 
 ! ---------- callback signature ----------------------------------------
 python module _smolpack__user__routines

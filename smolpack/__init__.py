@@ -1,4 +1,4 @@
-"""SMOLPACK — Smolyak Sparse-Grid Cubature for Python.
+"""SMOLPACK - Multidimensional Quadrature Using Smolyak Sparse Grids.
 
 Efficient numerical integration (cubature) over the unit hypercube
 [0,1]^d using Smolyak's algorithm with Clenshaw-Curtis quadrature rules.
