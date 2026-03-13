@@ -50,7 +50,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Add gfortran to PATH (macOS)
+      - name: Add gcc to PATH (macOS)
         if: runner.os == 'macOS'
         run: echo "$(brew --prefix gcc)/bin" >> "$GITHUB_PATH"
 
@@ -64,8 +64,19 @@ jobs:
       - name: Install project
         run: uv run bin/build.py install
 
-      - name: Build and Test with CMake
-        run: cmake -S . -B build && cmake --build build && ctest --output-on-failure --test-dir build
+      - name: Build and Test with CMake (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          cmake -S . -B build
+          cmake --build build
+          ctest --output-on-failure --test-dir build -C Debug
+
+      - name: Build and Test with CMake (Non-Windows)
+        if: runner.os != 'Windows'
+        run: |
+          cmake -S . -B build
+          cmake --build build
+          ctest --output-on-failure --test-dir build
 
       - name: Run Pytest
         run: uv run --no-sync pytest -v -n auto --cov --cov-report=xml

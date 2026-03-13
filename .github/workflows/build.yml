@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Add gfortran to PATH (macOS)
+      - name: Add gcc to PATH (macOS)
         if: runner.os == 'macOS'
         run: echo "$(brew --prefix gcc)/bin" >> "$GITHUB_PATH"
 
