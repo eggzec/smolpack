@@ -112,7 +112,8 @@ sudo dnf install gcc
 xcode-select --install
 ```
 
-On Windows, install MSVC via Visual Studio Build Tools or use MSYS2.
+On Windows, install MSVC (Microsoft Visual C++) via Visual Studio Build Tools. This is required for source builds and matches the official Python and NumPy wheels. MinGW is not supported.
+
 
 ## Verifying the installation
 
