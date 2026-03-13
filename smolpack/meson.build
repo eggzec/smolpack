@@ -26,6 +26,7 @@ py.extension_module('_smolpack',
     dependencies: [py_dep, m_dep],
     install: true,
     subdir: 'smolpack',
+    name_suffix: '',
 )
 
 py.install_sources(
