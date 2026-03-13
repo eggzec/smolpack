@@ -1,5 +1,7 @@
-project('smolpack', 'c',
-    version: '0.1.0',
+project(
+    'smolpack',
+    'c',
+    version: run_command(['python', 'bin/get_version.py'], check: true).stdout().strip(),
     meson_version: '>= 1.1.0',
     default_options: [
         'c_std=c11',

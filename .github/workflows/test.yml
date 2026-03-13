@@ -50,11 +50,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Add gfortran to PATH (macOS)
+        if: runner.os == 'macOS'
+        run: echo "$(brew --prefix gcc)/bin" >> "$GITHUB_PATH"
+
       - name: Setup uv
         uses: astral-sh/setup-uv@v7
 
       - name: Install project
-        run: uv sync --group test
+        run: uv run bin/build.py install
 
       - name: Run Pytest
         run: uv run --no-sync pytest -v -n auto --cov --cov-report=xml

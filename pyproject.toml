@@ -21,7 +21,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
-    'Programming Language :: Fortran',
+    'Programming Language :: C',
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -60,6 +60,7 @@ dev = [
 build = [
     "meson-python",
     "ninja",
+    "setuptools_scm>=8",
 ]
 docs = [
     "zensical>=0.0.23"
