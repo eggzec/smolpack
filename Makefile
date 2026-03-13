@@ -14,7 +14,7 @@ CC       = gcc
 CFLAGS   = -std=c11 -Wall -Wextra -pedantic -O2
 LDFLAGS  = -lm
 
-SRC_DIR  = smolpack
+SRC_DIR  = src
 TEST_DIR = tests
 BUILD    = build
 
