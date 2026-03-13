@@ -1,11 +1,9 @@
 # References
 
-## Original C Library
+## Attribution
 
-The C implementation of SMOLPACK was written by **Knut Petras** and is
-distributed via John Burkardt's website:
-
-> [https://people.math.sc.edu/Burkardt/c_src/smolpack/smolpack.html](https://people.math.sc.edu/Burkardt/c_src/smolpack/smolpack.html)
+The original C library SMOLPACK was written by Knut Petras and is distributed
+via [John Burkardt's page](https://people.math.sc.edu/Burkardt/c_src/smolpack/smolpack.html).
 
 ## Bibliography
 
