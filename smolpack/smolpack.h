@@ -38,11 +38,35 @@
  * @author  Knut Petras
  * @date    2007
  *
- * @par Reference
- *   Knut Petras,
- *   "Smolyak Cubature of Given Polynomial Degree with Few Nodes
- *    for Increasing Dimension",
- *   Numerische Mathematik, Vol. 93, No. 4, February 2003, pp. 729–753.
+ * @par References
+ *   -# Alan Genz,
+ *      "A Package for Testing Multiple Integration Subroutines",
+ *      in <em>Numerical Integration: Recent Developments, Software
+ *      and Applications</em>, edited by Patrick Keast and Graeme
+ *      Fairweather, Reidel, 1987, pp. 337–340,
+ *      ISBN 9027725144.
+ *   -# Erich Novak, Klaus Ritter,
+ *      "High Dimensional Integration of Smooth Functions over Cubes",
+ *      <em>Numerische Mathematik</em>, Vol. 75, No. 1,
+ *      November 1996, pp. 79–97.
+ *   -# Erich Novak, Klaus Ritter,
+ *      "Simple Cubature Formulas with High Polynomial Exactness",
+ *      <em>Constructive Approximation</em>, Vol. 15, No. 4,
+ *      December 1999, pp. 499–522.
+ *   -# Knut Petras,
+ *      "Fast Calculation of Coefficients in the Smolyak Algorithm",
+ *      <em>Numerical Algorithms</em>, Vol. 26, No. 2,
+ *      February 2001, pp. 93–109.
+ *   -# Knut Petras,
+ *      "Smolyak Cubature of Given Polynomial Degree with Few Nodes
+ *       for Increasing Dimension",
+ *      <em>Numerische Mathematik</em>, Vol. 93, No. 4,
+ *      February 2003, pp. 729–753.
+ *   -# Sergey Smolyak,
+ *      "Quadrature and Interpolation Formulas for Tensor Products
+ *       of Certain Classes of Functions",
+ *      <em>Doklady Akademii Nauk SSSR</em>, Vol. 4, 1963,
+ *      pp. 240–243.
  *
  * @note This implementation is C11 compliant.
  */
