@@ -55,6 +55,7 @@ issues = "https://github.com/eggzec/smolpack/issues"
 dev = [
   {include-group = "build"},
   {include-group = "docs"},
+  {include-group = "lint"},
   {include-group = "test"}
 ]
 build = [
@@ -64,6 +65,9 @@ build = [
 ]
 docs = [
     "zensical>=0.0.23"
+]
+lint = [
+    "ruff==0.15.*",
 ]
 test = [
     "pytest>=8.3.5",
@@ -86,3 +90,56 @@ local_scheme = "no-local-version"
 
 [tool.cibuildwheel]
 enable = ["cpython-prerelease"]
+
+[tool.ruff]
+line-length = 80
+indent-width = 4
+preview = true
+
+# Output serialization format for violations. The default serialization
+# format is "full" [env: RUFF_OUTPUT_FORMAT=] [possible values:
+# concise, full, json, json-lines, junit, grouped, github, gitlab,
+# pylint, rdjson, azure, sarif]
+output-format = "grouped"
+
+[tool.ruff.lint]
+isort.lines-after-imports = 2
+isort.split-on-trailing-comma = false
+
+select = [
+    "ANN", # flake8-annotations (required strict type annotations for public functions)
+    "S",   # flake8-bandit (checks basic security issues in code)
+    "BLE", # flake8-blind-except (checks the except blocks that do not specify exception)
+    "FBT", # flake8-boolean-trap (ensure that boolean args can be used with kw only)
+    "E",   # pycodestyle errors (PEP 8 style guide violations)
+    "W",   # pycodestyle warnings (e.g., extra spaces, indentation issues)
+    "DOC", # pydoclint issues (e.g., extra or missing return, yield, warnings)
+    "A",   # flake8-buitins (check variable and function names to not shadow builtins)
+    "N",   # Naming convention checks (e.g., PEP 8 variable and function names)
+    "F",   # Pyflakes errors (e.g., unused imports, undefined variables)
+    "I",   # isort (Ensures imports are sorted properly)
+    "B",   # flake8-bugbear (Detects likely bugs and bad practices)
+    "TID", # flake8-tidy-imports (Checks for banned or misplaced imports)
+    "UP",  # pyupgrade (Automatically updates old Python syntax)
+    "YTT", # flake8-2020 (Detects outdated Python 2/3 compatibility issues)
+    "FLY", # flynt (Converts old-style string formatting to f-strings)
+    "PIE", # flake8-pie
+    "PL",  # pylint
+    "RUF", # Ruff-specific rules (Additional optimizations and best practices)
+]
+
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["RUF067"]
+"**/tests/*.py" = [
+    "ANN001",  # Missing type annotation for function argument
+    "ANN202",  # Missing return type annotation for private function
+    "DOC201",  # `return` is not documented in docstring
+    "PLR6301", # Method could be a function, class method, or static method
+    "S101",    # Use of `assert` detected
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+skip-magic-trailing-comma = true

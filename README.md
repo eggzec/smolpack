@@ -28,8 +28,10 @@ evaluations) and a **standard Clenshaw-Curtis** variant (classical rule).
 import numpy as np
 import smolpack
 
+
 def my_func(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.int_smolyak(my_func, dim=3, qq=5)
 ```

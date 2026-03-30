@@ -39,8 +39,10 @@ $$
 import numpy as np
 import smolpack
 
+
 def exp_sum(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.int_smolyak(exp_sum, dim=3, qq=5)
 print(f"Result = {result:.6f}")
@@ -69,8 +71,10 @@ Both solvers applied to the same integrand in 3-D:
 import numpy as np
 import smolpack
 
+
 def exp_sum(dim, x):
     return np.exp(np.sum(x))
+
 
 exact = (np.e - 1.0) ** 3
 
@@ -92,14 +96,18 @@ additional function evaluations.
 import numpy as np
 import smolpack
 
+
 def exp_sum(dim, x):
     return np.exp(np.sum(x))
+
 
 exact = (np.e - 1.0) ** 3
 
 for qq in range(4, 10):
     result = smolpack.int_smolyak(exp_sum, dim=3, qq=qq)
-    print(f"qq={qq}  k={qq-3}  result={result:.10f}  error={abs(result - exact):.2e}")
+    print(
+        f"qq={qq}  k={qq - 3}  result={result:.10f}  error={abs(result - exact):.2e}"
+    )
 ```
 
 ## Example 5: Product integrand (separable)
@@ -111,12 +119,14 @@ $(1/2)^d$:
 import numpy as np
 import smolpack
 
+
 def product_x(dim, x):
     return np.prod(x)
 
+
 dim = 5
 result = smolpack.int_smolyak(product_x, dim=dim, qq=dim + 3)
-exact = 0.5 ** dim
+exact = 0.5**dim
 print(f"Result = {result:.10f}  (exact = {exact})")
 ```
 
@@ -133,8 +143,10 @@ $$
 import numpy as np
 import smolpack
 
+
 def product_cosine(dim, x):
     return np.prod(np.cos(x))
+
 
 result = smolpack.int_smolyak(product_cosine, dim=10, qq=12)
 exact = np.sin(1.0) ** 10
@@ -155,9 +167,11 @@ $$
 import numpy as np
 import smolpack
 
+
 def genz_oscillatory(dim, x):
     a = np.ones(dim)
     return np.cos(2.0 * np.pi * a[0] + np.sum(a * x))
+
 
 result = smolpack.int_smolyak(genz_oscillatory, dim=5, qq=8)
 print(f"Oscillatory integral = {result:.8f}")
@@ -171,8 +185,10 @@ Set `print_stats=True` to see function-call and weight-evaluation counts:
 import numpy as np
 import smolpack
 
+
 def exp_sum(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.int_smolyak(exp_sum, dim=3, qq=5, print_stats=True)
 ```

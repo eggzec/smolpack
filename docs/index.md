@@ -51,8 +51,10 @@ import smolpack
 # Integrate exp(x1 + x2 + x3) over [0,1]^3
 # Exact value: (e - 1)^3 ≈ 5.073214
 
+
 def my_func(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.int_smolyak(my_func, dim=3, qq=5)
 print(f"Integral ≈ {result:.6f}")

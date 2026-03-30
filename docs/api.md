@@ -39,8 +39,7 @@ approximate integral as a `float`.
 ### Callback signature
 
 ```python
-def f(dim: int, x: numpy.ndarray) -> float:
-    ...
+def f(dim: int, x: numpy.ndarray) -> float: ...
 ```
 
 | Parameter | Type | Description |
@@ -78,8 +77,10 @@ combination technique.
 import numpy as np
 import smolpack
 
+
 def f(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.int_smolyak(f, dim=3, qq=5)
 ```
@@ -102,8 +103,10 @@ can be more accurate for extremely smooth integrands.
 import numpy as np
 import smolpack
 
+
 def f(dim, x):
     return np.exp(np.sum(x))
+
 
 result = smolpack.cc_int_smolyak(f, dim=3, qq=5)
 ```

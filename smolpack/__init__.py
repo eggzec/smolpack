@@ -15,18 +15,17 @@ Example
 >>>
 >>> def my_func(dim, x):
 ...     return np.exp(np.sum(x))
-...
 >>> result = smolpack.int_smolyak(my_func, dim=3, qq=5)
 """
 
-from ._smolpack import (
-    delayed_cc as _delayed_cc,
-    standard_cc as _standard_cc,
-    get_count,
-)
+from ._smolpack import delayed_cc as _delayed_cc
+from ._smolpack import get_count
+from ._smolpack import standard_cc as _standard_cc
 
 
-def int_smolyak(f, dim, qq, print_stats=False):
+def int_smolyak(
+    f: callable, dim: int, qq: int, *, print_stats: bool = False
+) -> float:
     """Approximate an integral over [0,1]^dim (delayed Clenshaw-Curtis).
 
     Parameters
@@ -52,7 +51,9 @@ def int_smolyak(f, dim, qq, print_stats=False):
     return _delayed_cc(dim, qq, int(print_stats), f)
 
 
-def cc_int_smolyak(f, dim, qq, print_stats=False):
+def cc_int_smolyak(
+    f: callable, dim: int, qq: int, *, print_stats: bool = False
+) -> float:
     """Approximate an integral over [0,1]^dim (standard Clenshaw-Curtis).
 
     Parameters
@@ -78,4 +79,4 @@ def cc_int_smolyak(f, dim, qq, print_stats=False):
     return _standard_cc(dim, qq, int(print_stats), f)
 
 
-__all__ = ["int_smolyak", "cc_int_smolyak", "get_count"]
+__all__ = ["cc_int_smolyak", "get_count", "int_smolyak"]
