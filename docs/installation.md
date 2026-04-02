@@ -1,7 +1,6 @@
 # Installation
 
-`smolpack` is distributed as a compiled wheel on PyPI and can also be installed
-from source via GitHub.
+`smolpack` can be installed from PyPI, GitHub, or built from source.
 
 ---
 
@@ -16,30 +15,31 @@ For source builds you additionally need:
 - `meson` and `meson-python` build system
 - `numpy` (for `f2py` compilation)
 
-## PyPI (recommended)
+## [PyPI](https://pypi.org/project/smolpack)
+
+For using the PyPI package in your project, add the following to your
+configuration file:
+
+=== "pyproject.toml"
+
+    ```toml
+    [project]
+    dependencies = [
+        "smolpack"
+    ]
+    ```
+
+=== "requirements.txt"
+
+    ```text
+    smolpack
+    ```
 
 ### pip
 
 ```bash
 pip install --upgrade smolpack
 ```
-
-### pyproject.toml dependency
-
-```toml
-[project]
-dependencies = [
-    "smolpack"
-]
-```
-
-### requirements.txt
-
-```text
-smolpack
-```
-
-## Package managers
 
 ### uv
 
@@ -75,7 +75,7 @@ pdm add smolpack
 hatch add smolpack
 ```
 
-## Installing from source (GitHub)
+## [git](https://github.com/eggzec/smolpack)
 
 Install the latest development version directly from the repository:
 
@@ -85,8 +85,7 @@ pip install --upgrade "git+https://github.com/eggzec/smolpack.git#egg=smolpack"
 
 ### Building locally
 
-Clone and build from source if you want to modify the C code or test
-local changes:
+Clone and build from source to modify the C code or test local changes:
 
 ```bash
 git clone https://github.com/eggzec/smolpack.git
@@ -94,26 +93,24 @@ cd smolpack
 uv pip install .
 ```
 
-This invokes the `meson` build system to compile the C sources via
-`f2py` and install the resulting extension module in development mode.
+This invokes the `meson` build system to compile the C sources via `f2py`
+and install the resulting extension module.
 
 !!! warning "C compiler required"
-    Source builds require a working C compiler. On most Linux
-    distributions install `gcc`
+    Source builds require a working C compiler.
 
-```bash
-# Debian/Ubuntu
-sudo apt install gcc
+    ```bash
+    # Debian/Ubuntu
+    sudo apt install gcc
 
-# Fedora
-sudo dnf install gcc
+    # Fedora
+    sudo dnf install gcc
 
-# macOS (Homebrew — Clang is pre-installed via Xcode Command Line Tools)
-xcode-select --install
-```
+    # macOS (Clang via Xcode Command Line Tools)
+    xcode-select --install
+    ```
 
-On Windows, install MSVC (Microsoft Visual C++) via Visual Studio Build Tools. This is required for source builds and matches the official Python and NumPy wheels. MinGW is not supported.
-
+    On Windows, install MSVC via Visual Studio Build Tools. MinGW is not supported.
 
 ## Verifying the installation
 
@@ -129,8 +126,5 @@ print("smolpack is working! Integral:", result)
 
 ## Dependencies
 
-| Package | Purpose |
-|---|---|
-| `numpy` | Array handling, `f2py` integration |
-
-No other runtime dependencies are required.
+- Python >=3.10
+- [numpy](https://pypi.org/project/numpy)

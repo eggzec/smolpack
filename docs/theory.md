@@ -1,13 +1,22 @@
 # Theory
 
-This page covers the mathematical foundations behind `smolpack`: what
-multidimensional integration is, why tensor-product rules fail at scale, and
-how Smolyak's algorithm constructs sparse grids that overcome the curse of
-dimensionality.
+## Overview
+
+`smolpack` implements **Smolyak's sparse-grid cubature**, a method for approximating
+multidimensional integrals of the form
+
+$$
+I[f] = \int_{[0,1]^d} f(\mathbf{x})\,d\mathbf{x}
+$$
+
+without succumbing to the exponential cost of tensor-product rules. The method is
+particularly effective for smooth integrands in moderate dimensions ($d \lesssim 20$),
+where it achieves near-optimal convergence rates with dramatically fewer function
+evaluations than classical approaches.
 
 ---
 
-## 1) Background: Multidimensional integration
+## Background: Multidimensional integration
 
 **Cubature** is the numerical approximation of a multidimensional integral:
 
@@ -45,7 +54,9 @@ Even for moderate $d$, tensor-product rules are computationally intractable.
 This exponential scaling is the **curse of dimensionality**, first identified
 by Richard Bellman in the context of dynamic programming.
 
-## 2) Smolyak's algorithm
+---
+
+## Smolyak's algorithm
 
 In 1963, Sergey Smolyak proposed a construction that achieves polynomial
 exactness comparable to tensor-product rules while requiring dramatically
@@ -92,7 +103,9 @@ dimension.
     rules. This is precisely the same degree of exactness that the
     corresponding tensor-product rule achieves, but with far fewer nodes.
 
-## 3) Clenshaw-Curtis quadrature
+---
+
+## Clenshaw-Curtis quadrature
 
 The Smolyak construction requires a nested family of 1-D quadrature rules as
 its basic sequence. `smolpack` uses **Clenshaw-Curtis** rules, which are based
@@ -129,7 +142,9 @@ same polynomial exactness with fewer total function evaluations.
     node counts but achieve the same polynomial exactness at the same
     level $q$. The delayed variant typically uses fewer nodes.
 
-## 4) Parameters and constraints
+---
+
+## Parameters and constraints
 
 ### The level parameter $q$
 
@@ -161,7 +176,9 @@ Clenshaw-Curtis quadrature weights. The `print_stats` flag reports both
 the number of function evaluations $N$ and the number of weight evaluations
 performed during grid construction.
 
-## 5) Error and convergence
+---
+
+## Error and convergence
 
 For sufficiently smooth integrands (functions with bounded mixed partial
 derivatives), the Smolyak cubature error satisfies:

@@ -1,10 +1,22 @@
 # API Reference
 
-All public routines are exported via the `smolpack` Python module.
+`smolpack` provides a Python interface to the SMOLPACK C library (Petras, 2001; 2003)
+for sparse-grid Smolyak cubature. The numerical core is implemented in C and compiled
+via `f2py`, providing near-native performance with a NumPy-based Python interface.
+See the [Theory](theory.md) and [Quickstart](quickstart.md) for mathematical background
+and usage examples.
 
 ---
 
-## Overview
+## Main Features
+
+- Sparse-grid cubature over $[0,1]^d$ for any dimension $1 \le d < 40$
+- Two solver variants: delayed and standard Clenshaw-Curtis Smolyak rules
+- Simple integrand signature — any callable `f(dim, x) -> float` works
+- Built-in function-evaluation counter via `get_count()`
+- `print_stats` flag for runtime diagnostics
+
+## Solvers
 
 | Function | Underlying 1-D rule | Integrates |
 |---|---|---|
@@ -133,7 +145,22 @@ print(f"Evaluations: {n}")
 
 ---
 
-## References
+## Example Workflows
 
-See [References](references.md) for full citations of the Petras and Smolyak
-papers underlying the algorithms.
+`smolpack` supports any callable integrand. You can:
+
+- Integrate smooth analytic functions in low to moderate dimensions
+- Compare accuracy between `int_smolyak` and `cc_int_smolyak` at the same level
+- Monitor the number of function evaluations with `get_count()` or `print_stats=True`
+- Use lambda functions for quick interactive experiments
+
+See the [Quickstart](quickstart.md) for full code examples, including:
+
+- Exponential sum and product integrands
+- High-dimensional integration (10-D)
+- Genz oscillatory test functions
+- Convergence study with increasing `qq`
+- Solver comparison
+
+All examples demonstrate both `int_smolyak` and `cc_int_smolyak`, along with
+the `get_count()` and `print_stats` diagnostics.
