@@ -97,20 +97,23 @@ This invokes the `meson` build system to compile the C sources via `f2py`
 and install the resulting extension module.
 
 !!! warning "C compiler required"
-    Source builds require a working C compiler.
+    Source builds require a working C compiler. On most Linux distributions,
+    install `gcc`:
 
-    ```bash
-    # Debian/Ubuntu
-    sudo apt install gcc
-
-    # Fedora
-    sudo dnf install gcc
-
-    # macOS (Clang via Xcode Command Line Tools)
-    xcode-select --install
-    ```
-
-    On Windows, install MSVC via Visual Studio Build Tools. MinGW is not supported.
+    === "Debian / Ubuntu"
+        ```bash
+        sudo apt install gcc
+        ```
+    === "Fedora"
+        ```bash
+        sudo dnf install gcc
+        ```
+    === "macOS (Homebrew)"
+        ```bash
+        brew install gcc
+        ```
+    === "Windows"
+        Install [MinGW-w64](https://www.mingw-w64.org/) with gcc or use MSYS2.
 
 ## Verifying the installation
 
