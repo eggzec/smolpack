@@ -3,7 +3,7 @@ import logging
 import os
 import shlex
 import shutil
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from pathlib import Path
 
@@ -46,7 +46,7 @@ def run_command(command: str, cwd: str | None = None) -> None:
 
     logger.info(f"Executing command: '{command}' in '{cwd}'")
 
-    with subprocess.Popen(  # noqa: S603
+    with subprocess.Popen(  # ruff: ignore[subprocess-without-shell-equals-true]
         shlex.split(command),
         cwd=str(cwd),
         stdout=subprocess.PIPE,

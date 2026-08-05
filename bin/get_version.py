@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from pathlib import Path
 
