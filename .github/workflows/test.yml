@@ -29,11 +29,24 @@ jobs:
       - name: Fetch Supported Python
         id: fetch-versions
         run: |
-          versions=$(curl -fsSL https://endoflife.date/api/v1/products/python/ \
-                     | jq '[ .result.releases[] | select(.isEol == false) | .label ]')
+          # Without pipefail this pipeline reports jq's exit status, not
+          # curl's, so a network failure is masked: jq reads empty input,
+          # emits [], and the matrix expands to zero jobs. build-and-test
+          # then never gets created and the run fails with no failing step.
+          set -euo pipefail
 
-          echo "supported_versions=$(echo $versions | jq -c '.')"        >> $GITHUB_OUTPUT
-          echo "bound_versions=$(echo $versions | jq -c '[.[0],.[-1]]')" >> $GITHUB_OUTPUT
+          versions=$(curl -fsSL --proto '=https' --proto-redir '=https' \
+                       --retry 3 --retry-all-errors --connect-timeout 15 \
+                       https://endoflife.date/api/v1/products/python/ \
+                     | jq -c '[ .result.releases[] | select(.isEol == false) | .label ]')
+
+          if [ "$(echo "$versions" | jq 'length')" -eq 0 ]; then
+            echo "::error::endoflife.date returned no supported Python versions"
+            exit 1
+          fi
+
+          echo "supported_versions=$versions"                              >> $GITHUB_OUTPUT
+          echo "bound_versions=$(echo "$versions" | jq -c '[.[0],.[-1]]')" >> $GITHUB_OUTPUT
 
   build-and-test:
     name: Build and Test
@@ -42,7 +55,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # macos pinned to 15 to match the wheel target used in build.yml
+        # and release-pypi.yml; see the note there.
+        os: [ubuntu-latest, windows-latest, macos-15]
         python-version: ${{ fromJson(needs.fetch-python-versions.outputs.supported_versions) }}
 
     steps:
@@ -50,9 +65,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Add gcc to PATH (macOS)
+      - name: Install gfortran (macOS)
         if: runner.os == 'macOS'
-        run: echo "$(brew --prefix gcc)/bin" >> "$GITHUB_PATH"
+        run: |
+          brew install gcc || brew link --overwrite gcc
+          echo "$(brew --prefix gcc)/bin" >> "$GITHUB_PATH"
+          "$(brew --prefix gcc)/bin/gfortran" --version
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v7
@@ -62,7 +80,7 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Install project
-        run: uv run bin/build.py install
+        run: uv run --locked bin/build.py install
 
       - name: Build and Test with CMake (Windows)
         if: runner.os == 'Windows'
