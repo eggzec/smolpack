@@ -1,4 +1,6 @@
-# smolpack
+![SmolPack](assets/smolpack-banner.png)
+
+# SmolPack
 
 **Multidimensional Quadrature Using Sparse Grids for Python**
 
