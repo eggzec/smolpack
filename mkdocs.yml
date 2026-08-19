@@ -13,6 +13,8 @@ extra:
 
 theme:
   name: material
+  logo: assets/smolpack-icon.svg
+  favicon: assets/smolpack-icon.png
   features:
     - content.code.copy
 
