@@ -1,4 +1,4 @@
-![SmolPack](assets/smolpack-banner.png)
+![SmolPack](https://raw.githubusercontent.com/eggzec/smolpack/main/docs/assets/smolpack-banner.png)
 
 # SmolPack
 
